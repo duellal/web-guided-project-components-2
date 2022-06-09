@@ -49,7 +49,6 @@ function dogCardMaker({ breed, imageURL }) { // dogObj { imageURL: "blah.jpg", b
 // 👉 TASK 4- Bring the Axios library into the project using one of two methods:
 //    * Traditional way: put another script tag inside index.html (`https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js`)
 //    * Projects with npm: install it with npm and import it into this file
-axios.get("https://dog.ceo/api/breeds/image/random").then(res => console.log(res))
 
 // 👉 TASK 5- Fetch dogs from `https://dog.ceo/api/breed/{breed}/images/random/{number}`
 //    * ON SUCCESS: use the data to create dogCards and append them to the entry point
@@ -63,6 +62,22 @@ axios.get("https://dog.ceo/api/breeds/image/random").then(res => console.log(res
 
 // 👉 (OPTIONAL) TASK 7- Put a button in index.html to 'get dogs' and add a click
 // event listener that executes `getDogs`
+function getDogs() {
+  axios.get("https://dog.ceo/api/breed/samoyed/images/random/3")
+  .then(res => {
+    console.log(res.data.message);
+    res.data.message.forEach(dog => {
+      const dogObj = {
+        breed: "Casey",
+        imageURL: dog
+      }
+      const dogCard = dogCardMaker(dogObj);
+      entryPoint.appendChild(dogCard);
+    })
+  })
+  .catch(err => console.error(err))
+  .finally(() => console.log("PHEW I'M DONE!"))
+}
 
 
 // 👉 (OPTIONAL) TASK 8- Import the breeds from `breeds.js`
