@@ -59,26 +59,27 @@ function dogCardMaker({ breed, imageURL }) { // dogObj { imageURL: "blah.jpg", b
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)
 
-
 // 👉 (OPTIONAL) TASK 7- Put a button in index.html to 'get dogs' and add a click
 // event listener that executes `getDogs`
-function getDogs() {
-  axios.get("https://dog.ceo/api/breed/samoyed/images/random/3")
-  .then(res => {
-    console.log(res.data.message);
-    res.data.message.forEach(dog => {
-      const dogObj = {
-        breed: "Casey",
-        imageURL: dog
-      }
-      const dogCard = dogCardMaker(dogObj);
-      entryPoint.appendChild(dogCard);
+//https://dog.ceo/api/breed/{breed}/images/random/{number}
+function getDogs(breed, count) {
+  axios.get(`https://dog.ceo/api/breed/${breed}/images/random/${count}`)
+    .then(res => {
+      entryPoint.innerHTML = "";
+      res.data.message.forEach(dog => {
+        const dogObj = {
+          breed: "Casey",
+          imageURL: dog
+        }
+        const dogCard = dogCardMaker(dogObj);
+        entryPoint.appendChild(dogCard);
+      })
     })
-  })
-  .catch(err => console.error(err))
-  .finally(() => console.log("PHEW I'M DONE!"))
+    .catch(err => console.error(err))
+    .finally(() => console.log("PHEW I'M DONE!"))
 }
-
+const button = document.querySelector("button");
+button.addEventListener("click", () => getDogs("doberman", 5));
 
 // 👉 (OPTIONAL) TASK 8- Import the breeds from `breeds.js`
 // and loop over them, fetching a dog at each iteration
