@@ -167,6 +167,9 @@ function getDogs(breed, num) {
     });
 }
 
+//Making sure the funciton works:
+getDogs('collie', 9)
+
 // 👉 (OPTIONAL) TASK 7- Put a button in index.html to 'get dogs' and add a click
 // event listener that executes `getDogs`
 
