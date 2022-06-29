@@ -170,7 +170,7 @@ function getDogs(breed, num) {
 // 👉 (OPTIONAL) TASK 7- Put a button in index.html to 'get dogs' and add a click
 // event listener that executes `getDogs`
 
-getDogs('retriever', 9)
+
 
 // 👉 (OPTIONAL) TASK 8- Import the breeds from `breeds.js`
 // and loop over them, fetching a dog at each iteration
