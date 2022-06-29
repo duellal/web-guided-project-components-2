@@ -108,21 +108,22 @@ axios
     // //Inside the message within the data - an array of image strings
     // console.log('Images:', response.data.message);
 
-    const images = res.data.message;
+    const images = response.data.message;
 
     images.forEach(image => {
       const doggyCard = dogCardMaker({ imageURL: image, breed: 'Collie' });
+      console.log(doggyCard)
 
       entryPoint.appendChild(doggyCard)
     })
 
-    // console.log('Done')
+    console.log('Done')
   })
   .catch(error => {
-    debugger;
+    console.log(error);
+    console.log('Done')
   })
 
-console.log(dogCardMaker({ imageURL: 'https://dog.ceo/api/breed/collie/images/random/9', breed: 'collie' }))
 
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)
