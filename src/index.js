@@ -96,44 +96,81 @@ function dogCardMaker({ imageURL, breed }) {
 //    * ON FAILURE: log the error to the console
 //    * IN ANY CASE: log "done" to the console
 
-axios
-  .get('https://dog.ceo/api/breed/collie/images/random/9')
-  .then((response) => {
-    // Ways to see the response and what is nested inside of it:
-    // debugger;
-    // // The Whole Response:
-    // console.log('This is the response:', response);
-    // // Inside the data:
-    // console.log('Message:', response.data);
-    // //Inside the message within the data - an array of image strings
-    // console.log('Images:', response.data.message);
+// axios
+//   .get('https://dog.ceo/api/breed/collie/images/random/9')
+//   .then((response) => {
+//     // Ways to see the response and what is nested inside of it:
+//     // debugger;
+//     // // The Whole Response:
+//     // console.log('This is the response:', response);
+//     // // Inside the data:
+//     // console.log('Message:', response.data);
+//     // //Inside the message within the data - an array of image strings
+//     // console.log('Images:', response.data.message);
 
-    const images = response.data.message;
+//     const images = response.data.message;
 
-    images.forEach(image => {
-      const doggyCard = dogCardMaker({ imageURL: image, breed: 'Collie' });
-      console.log(doggyCard)
+//     images.forEach(image => {
+//       const doggyCard = dogCardMaker({ imageURL: image, breed: 'Collie' });
+//       console.log(doggyCard)
 
-      entryPoint.appendChild(doggyCard)
-    })
+//       entryPoint.appendChild(doggyCard)
+//     })
 
-    console.log('Done')
-  })
-  .catch(error => {
-    console.log(error);
-    console.log('Done')
-  })
+//     console.log('Done')
+//   })
+//   .catch(error => {
+//     console.log(error);
+//     console.log('Done')
+//   })
 
+// axios
+//   .get('https://dog.ceo/api/breed/collie/images/random/9')
+//   .then(res => {
+//     const images = res.data.message;
+
+//     images.forEach(image => {
+//       const doggyCard = dogCardMaker({ imageURL: image, breed: 'Collie' })
+
+//       entryPoint.appendChild(doggyCard);
+//     })
+
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
+//   .finally(() => {
+//     console.log("Done");
+//   });
 
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)
 
+function getDogs(breed, num) {
+  axios
+    .get(`https://dog.ceo/api/breed/${breed}/images/random/${num}`)
+    .then(res => {
+      const images = res.data.message;
 
+      images.forEach(image => {
+        const doggyCard = dogCardMaker({ imageURL: image, breed: `${breed}` })
+
+        entryPoint.appendChild(doggyCard);
+      })
+
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .finally(() => {
+      console.log("Done");
+    });
+}
 
 // 👉 (OPTIONAL) TASK 7- Put a button in index.html to 'get dogs' and add a click
 // event listener that executes `getDogs`
 
-
+getDogs('retriever', 9)
 
 // 👉 (OPTIONAL) TASK 8- Import the breeds from `breeds.js`
 // and loop over them, fetching a dog at each iteration
